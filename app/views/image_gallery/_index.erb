@@ -1,0 +1,22 @@
+<h2>Image Gallery</h2>
+
+<ul class="image-collection-list">
+<% collections.each do |x|  %>
+	<li>
+		<a href="<%= collection_page %>?id=<%= x.id%>">
+			<div class="img-wrapper">
+				<img src="<%= x.header_image.url %>" />
+			</div>
+		</a>
+		<div class="image-collection-info">
+			<a href="<%= collection_page %>?id=<%= x.id%>">
+				<span class="title"><%= x.name %></span><br />
+			</a>
+			<span class="description"><%= x.description %></span>
+		</div>
+		
+	</li>
+<% end %>
+</ul>
+
+<%= will_paginate collections %>

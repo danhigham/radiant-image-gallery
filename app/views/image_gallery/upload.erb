@@ -1,0 +1,71 @@
+<h2>Upload images</h2>
+
+<!-- Image collection drop down -->
+<ul class="upload-information">
+	<li>
+		<label>Select an existing collection</label>
+		<%= select ("collection", "id", @collections.map {|u| [ u.name, u.id] }) %>
+	</li>
+	<li>
+		- or -
+	</li>
+	<li>
+		<!-- New image collection textbox -->
+		<label>Enter a name for a new collection</label>
+		<input type="text" name="new_collection_name" id="new_collection_name" />
+	</li>
+	<li>	
+		<!-- description -->
+		<label>and a description</label>
+		<textarea name="new_collection_desc" id="new_collection_desc"></textarea>
+	</li>
+</ul>
+<!-- Upload control -->
+
+
+<div id="html5_uploader">You browser doesn't support native upload. Try Firefox 3 or Safari 4.</div>
+
+<script>
+	var atoken = '<%= form_authenticity_token %>';
+	$(document).ready(function(){
+		 // Setup html5 version
+		    $("#html5_uploader").pluploadQueue({
+		        // General settings
+		        runtimes : 'html5,flash,silverlight,gears,browserplus',
+		        url : '/image_gallery/upload',
+		        max_file_size : '10mb',
+		        //chunk_size : '1mb',
+		        //chunk_size : '512kb',
+				unique_names : true,
+				
+				multipart: true,
+			    //RoR - make sure to send authenticity token and any other parameters that are on the plain html form  
+			    multipart_params : {
+					authenticity_token : atoken, 
+					new_collection_name : $('input#new_collection_name').val(),
+					existing_collection : $('select#collection_id').val(),
+					new_collection_desc : $('textarea#new_collection_desc').val()
+				},
+				
+		        // Resize images on clientside if we can
+		        resize : {width : 800, height : 600, quality : 90},
+
+		        // Specify what files to browse for
+		        filters : [
+		            {title : "Image files", extensions : "jpg,gif,png"},
+		            {title : "Zip files", extensions : "zip"}
+		        ]
+		    });
+		
+			var uploader = $('#html5_uploader').pluploadQueue();
+			uploader.bind('BeforeUpload', function(up, file) {
+				up.settings.multipart_params = {
+					authenticity_token : atoken, 
+					new_collection_name : $('input#new_collection_name').val(),
+					existing_collection : $('select#collection_id').val(),
+					new_collection_desc : $('textarea#new_collection_desc').val()
+				};
+			});
+			
+	})
+</script>

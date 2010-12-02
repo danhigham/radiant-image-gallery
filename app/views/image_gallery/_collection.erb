@@ -1,0 +1,21 @@
+<h2><%= collection.name %></h2>
+<p><%= collection.description %></p>
+<div class="pagination">
+	<a href="<%= gallery_page %>"><< Back to the gallery</a>
+</div>
+
+<ul class="images">
+	<% images.each do |image| %>
+		<li>
+			<a href="<%= image.data.url(:large) %>" rel="collection_images">
+				<img src="<%= image.data.url(:medium) %>" />
+			</a>
+		</li>
+	<% end %>
+</ul>
+
+<%= will_paginate images %>
+
+<script>
+	$("a[rel='collection_images']").colorbox();
+</script>

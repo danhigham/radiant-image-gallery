@@ -1,0 +1,19 @@
+ul.image-collection-list { float : left; }
+ul.image-collection-list li { display : block; float : left; margin: 20px 0px; width: 200px; }
+ul.image-collection-list li img { border : none; }
+ul.image-collection-list li div.img-wrapper { margin-bottom : 10px; height : 200px;}
+ul.image-collection-list li div.image-collection-info { clear : both; height : 20px;}
+ul.image-collection-list li div.image-collection-info span.description { font-style : italic; text-decoration : none; }
+
+ul.images { float : left; }
+ul.images li { display : block; float : left; margin : 20px 10px; width : 250px; height:250px;}
+ul.images li img { border : none; background : #f0f0ff; padding:4px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: rgba(0, 0, 0, 0.496094) 1px 2px 6px; }
+
+div.pagination, div.pagination a { font-size : 1em; clear : left; }
+a { font-size : 1em; }
+
+ul.upload-information { list-style: none; margin: 10px; display : block;}
+ul.upload-information li { min-height : 30px; }
+ul.upload-information li label { width : 200px; margin : 5px; display : block; float : left; }
+ul.upload-information li textarea { width : 200px; height : 50px; }
+ul.upload-information li input[type="text"] { width : 200px;  }
