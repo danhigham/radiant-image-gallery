@@ -45,4 +45,18 @@ class ImageGalleryController < ApplicationController
       render :text => "0"
     end
   end
+  
+  def delete_collection
+    if request.post?
+      collection_id = params[:collection_id]
+      
+      #ImageCollection.delete(collection_id)
+      
+      render :text => "1"
+    else
+    
+      render :text => "0"
+    end
+  end
+  
 end

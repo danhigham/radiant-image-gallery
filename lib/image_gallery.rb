@@ -64,12 +64,14 @@ module ImageGallery
     user = UserActionObserver.current_user
     view = response.template 
     controller = view.controller 
-     
+    
+    logged_in = !user.nil?
+    
     image_collections = ImageCollection.paginate :page => params[:page], :order => 'created_at DESC'
     collection_page = tag.attr['collection_page']
 
     view.content_tag :div, :id => 'collections' do 
-      response.template.render(:partial => 'image_gallery/index', :locals => { :collections => image_collections, :collection_page => collection_page })
+      response.template.render(:partial => 'image_gallery/index', :locals => { :collections => image_collections, :collection_page => collection_page, :logged_in => logged_in })
     end
   end
   
