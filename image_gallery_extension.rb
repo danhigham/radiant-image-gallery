@@ -8,7 +8,8 @@ class ImageGalleryExtension < Radiant::Extension
   
   define_routes do |map|
     map.connect 'image_gallery/index', :controller => 'image_gallery', :action => 'index'   
-    map.connect 'image_gallery/upload', :controller => 'image_gallery', :action => 'upload'       
+    map.connect 'image_gallery/upload', :controller => 'image_gallery', :action => 'upload'
+    map.connect 'image_gallery/delete_image', :controller => 'image_gallery', :action => 'delete_image'       
   end
   
   extension_config do |config|

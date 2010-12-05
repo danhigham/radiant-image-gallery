@@ -10,6 +10,10 @@
 			<a href="<%= image.data.url(:large) %>" rel="collection_images">
 				<img src="<%= image.data.url(:medium) %>" />
 			</a>
+			<% if logged_in %>
+				<input type="hidden" value="<%= image.id %>" />
+				<a href="#" class="delete-image">Delete</a>
+			<% end %>
 		</li>
 	<% end %>
 </ul>

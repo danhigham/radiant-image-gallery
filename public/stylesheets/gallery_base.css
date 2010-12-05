@@ -17,3 +17,5 @@ ul.upload-information li { min-height : 30px; }
 ul.upload-information li label { width : 200px; margin : 5px; display : block; float : left; }
 ul.upload-information li textarea { width : 200px; height : 50px; }
 ul.upload-information li input[type="text"] { width : 200px;  }
+
+a.delete-image { background: black; display: block; padding: 3px; width: 40px; }

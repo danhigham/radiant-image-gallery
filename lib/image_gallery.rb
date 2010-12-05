@@ -47,9 +47,12 @@ module ImageGallery
     images = collection.images.paginate :page => params[:page], :order => 'created_at DESC'
   
     gallery_page = tag.attr['gallery_page']
+    
+    logged_in = !user.nil?
   
     view.content_tag :div, :id => 'image-collection' do 
-      response.template.render(:partial => 'image_gallery/collection', :locals => { :images => images, :collection => collection, :gallery_page => gallery_page })
+      response.template.render(:partial => 'image_gallery/collection', 
+        :locals => { :images => images, :collection => collection, :gallery_page => gallery_page, :logged_in => logged_in })
     end
     
   end

@@ -1,3 +1,5 @@
+#Upate to make sure auth is required to post to these actions
+
 class ImageGalleryController < ApplicationController
   layout :except => ''
    
@@ -31,4 +33,16 @@ class ImageGalleryController < ApplicationController
     end
   end
   
+  def delete_image
+    if request.post?
+      image_id = params[:image_id]
+      
+      #Image.delete(image_id)
+      
+      render :text => "1"
+    else
+    
+      render :text => "0"
+    end
+  end
 end
