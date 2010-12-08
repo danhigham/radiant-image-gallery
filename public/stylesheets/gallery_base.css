@@ -18,7 +18,7 @@ ul.upload-information li label { width : 200px; margin : 5px; display : block; f
 ul.upload-information li textarea { width : 200px; height : 50px; }
 ul.upload-information li input[type="text"] { width : 200px;  }
 
-div.delete-image {
+div.delete-image, div.delete-collection {
 	-webkit-box-shadow: rgba(0, 0, 0, 0.496094) 1px 2px 6px;
 	background: black;
 	border-bottom-left-radius: 3px 3px;
@@ -31,19 +31,5 @@ div.delete-image {
 	position: relative;
 	top:-10px;
 	left:10px;
-}
-
-div.delete-collection {
-	-webkit-box-shadow: rgba(0, 0, 0, 0.496094) 1px 2px 6px;
-	background: black;
-	border-bottom-left-radius: 3px 3px;
-	border-bottom-right-radius: 3px 3px;
-	border-top-left-radius: 3px 3px;
-	border-top-right-radius: 3px 3px;
-	display: block;
-	float: left;
-	padding: 5px;
-	position: relative;
-	top:-10px;
-	left:10px;
+	color : #fff;
 }
