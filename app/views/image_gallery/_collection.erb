@@ -7,14 +7,15 @@
 <ul class="images">
 	<% images.each do |image| %>
 		<li>
+			<% if logged_in %>
+				<input type="hidden" value="<%= image.id %>" />
+				<div class="delete-image"><a href="#" class="delete-image">Delete</a></div>
+			<% end %>
 			<a href="<%= image.data.url(:large) %>" rel="collection_images">
 				<img src="<%= image.data.url(:medium) %>" />
 			</a>
-			<% if logged_in %>
-				<input type="hidden" value="<%= image.id %>" />
-				<a href="#" class="delete-image">Delete</a>
-			<% end %>
 		</li>
+		
 	<% end %>
 </ul>
 

@@ -3,6 +3,10 @@
 <ul class="image-collection-list">
 <% collections.each do |x|  %>
 	<li>
+		<% if logged_in %>
+			<input type="hidden" value="<%= x.id %>">
+			<div class="delete-collection"><a class="delete-collection" href="#">Delete</a></div>
+		<% end %>
 		<a href="<%= collection_page %>?id=<%= x.id%>">
 			<div class="img-wrapper">
 				<img src="<%= x.header_image.url %>" />
@@ -13,12 +17,9 @@
 				<span class="title"><%= x.name %></span><br />
 			</a>
 			<span class="description"><%= x.description %></span>
-			<input type="hidden" value="<%= x.id %>">
-			<% if logged_in %>
-				<a href="#" class="delete-collection">Delete</a>
-			<% end %>
+			
+			
 		</div>
-		
 	</li>
 <% end %>
 </ul>

@@ -14,7 +14,7 @@ $(document).ready(function (){
 					//remove item from list
 			
 					if (status == "1") {
-						var list_item = link.parent(); 
+						var list_item = link.parent().parent(); 
 					
 						list_item.hide({duration : 100});
 						//Change this to remove on success event of list_item.hide
