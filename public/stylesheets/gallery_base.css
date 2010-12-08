@@ -34,4 +34,4 @@ div.delete-image, div.delete-collection {
 	
 }
 
-div.delete-image, div.delete-collection a { color : #fff; }
+div.delete-image a, div.delete-collection a { color : #fff; }
