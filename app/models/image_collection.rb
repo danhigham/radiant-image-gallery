@@ -12,15 +12,19 @@ class ImageCollection < ActiveRecord::Base
                     
   def update_header
     image_stack = Array.new
+    rotation = 0
     
-    self.images.sort{|x,y| y.created_at <=> x.created_at}.first(4).each do |image|
+    images = self.images.sort{|x,y| y.created_at <=> x.created_at}.first(4)
+    
+    images.each do |image|
+      rotation += 7
       img = Magick::Image::read(image.data.path(:thumb)).first
       
-      img = polaroid_effect(img)
+      img = polaroid_effect(img, rotation)
       image_stack << img  
     end
     
-    img = composite_stack(image_stack)
+    img = composite_stack(image_stack, -(rotation / 2))
     
     tempfile = Tempfile.new('header_image.png')
     img.write(tempfile.path)
@@ -31,7 +35,7 @@ class ImageCollection < ActiveRecord::Base
   
   private 
   
-  def polaroid_effect(image)
+  def polaroid_effect(image, rotation)
     image.border!(8, 8, "#f0f0ff")
     image.border!(1, 1, "#a9a9a9")
 
@@ -55,7 +59,7 @@ class ImageCollection < ActiveRecord::Base
     # Composite image over shadow. The y-axis adjustment can vary according to taste.
     #image = shadow.composite(image, -amplitude/2, 5, Magick::OverCompositeOp)
 
-    rotation_angle = rand(10) - rand(10) # random angle
+    rotation_angle = rotation || (rand(10) - rand(10)) # random angle
 
     image.rotate!(rotation_angle)                       # vary according to taste
     image.trim!
@@ -63,19 +67,22 @@ class ImageCollection < ActiveRecord::Base
     image
   end
   
-  def composite_stack(image_stack)
-    base_image = Magick::Image.new(200,200) {
+  def composite_stack(image_stack, rotation)
+    base_image = Magick::Image.new(400,400) {
       self.background_color = "none"
     }
     
     image_stack.each do |image|
-      x = rand(200 - image.columns)
-      y = rand(200 - image.rows)
+      #x = rand(200 - image.columns)
+      #y = rand(200 - image.rows)
+      
+      x = y = 0
       
       base_image.composite!(image, x, y, Magick::OverCompositeOp)
     end
+    base_image.rotate!(rotation)
     base_image.trim!
-    base_image
+    base_image.resize_to_fit(200,200)
   end
 
 end
