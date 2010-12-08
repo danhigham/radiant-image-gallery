@@ -31,5 +31,7 @@ div.delete-image, div.delete-collection {
 	position: relative;
 	top:-10px;
 	left:10px;
-	color : #fff;
+	
 }
+
+div.delete-image, div.delete-collection a { color : #fff; }
