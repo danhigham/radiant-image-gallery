@@ -8,7 +8,7 @@ $(document).ready(function (){
 			$.ajax({
 	    		type: "POST",
 	    		url: '/image_gallery/delete_image',
-	    		data: {image_id: link.siblings("input").val()},
+	    		data: {image_id: link.parent().siblings("input").val()},
 	    		dataType: "text",
 	    		success: function(status){
 					//remove item from list
@@ -32,7 +32,7 @@ $(document).ready(function (){
 			$.ajax({
 	    		type: "POST",
 	    		url: '/image_gallery/delete_collection',
-	    		data: {collection_id: link.siblings("input").val()},
+	    		data: {collection_id: link.parent().siblings("input").val()},
 	    		dataType: "text",
 	    		success: function(status){
 					//remove item from list

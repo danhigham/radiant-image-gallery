@@ -36,8 +36,12 @@ class ImageGalleryController < ApplicationController
   def delete_image
     if request.post?
       image_id = params[:image_id]
+      image = Image.find(image_id)
       
-      #Image.delete(image_id)
+      collection = image.image_collection
+      image.delete
+      
+      collection.update_header
       
       render :text => "1"
     else
@@ -50,7 +54,7 @@ class ImageGalleryController < ApplicationController
     if request.post?
       collection_id = params[:collection_id]
       
-      #ImageCollection.delete(collection_id)
+      ImageCollection.delete(collection_id)
       
       render :text => "1"
     else
