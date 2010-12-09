@@ -18,7 +18,7 @@ class ImageCollection < ActiveRecord::Base
     
     images.each do |image|
       rotation += 7
-      img = Magick::Image::read(image.data.path(:thumb)).first
+      img = Magick::Image::read(image.data.path(:medium)).first
       
       img = polaroid_effect(img, rotation)
       image_stack << img  
