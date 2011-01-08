@@ -8,7 +8,7 @@ class ImageCollection < ActiveRecord::Base
                     :path => ":rails_root/public/gallery/header/:id/header.png"
                     
   cattr_reader :per_page
-  @@per_page = 8
+  @@per_page = 9
                     
   def update_header
     image_stack = Array.new
