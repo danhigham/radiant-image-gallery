@@ -25,7 +25,7 @@ module ImageGallery
         <script type="text/javascript" src="/javascripts/plupload/plupload.full.min.js"></script>
         <script type="text/javascript" src="/javascripts/plupload/jquery.plupload.queue.min.js"></script>
         <script type="text/javascript" src="/javascripts/gallery_admin.js"></script>
-        <script type="text/javascript" src="/javascripts/jquery-ui-1.8.8.custom.min.js"><script>
+        <script type="text/javascript" src="/javascripts/jquery-ui-1.8.8.custom.min.js"></script>
         
         <link href="/stylesheets/plupload.queue.css" media="screen" rel="stylesheet" type="text/css" /> 
       }
