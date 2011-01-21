@@ -1,3 +1,27 @@
+<% if logged_in %>
+	<script>
+		$('document').ready(function () {
+			$("ul.image-collection-list").sortable({
+				stop: function(event, ui) { 
+					//Write the new order back to the server
+					var itemCount = $("ul.image-collection-list li input").length;
+					var idsInOrder = new Array(itemCount);
+					
+					for (var x=0; x<$("ul.image-collection-list li input").length; x++)
+						idsInOrder[x] = $("ul.image-collection-list li input")[x].value;
+					
+					$.ajax({
+					  type: 'POST',
+					  url: '/image_gallery/reorder_collections',
+					  data: {image_order: idsInOrder},
+					  dataType: 'text/json'
+					});
+				}
+			});
+		})
+	</script>
+<% end %>
+
 <h2>Image Gallery</h2>
 
 <ul class="image-collection-list">
@@ -24,4 +48,6 @@
 <% end %>
 </ul>
 
+<% if !logged_in %>
 <%= will_paginate collections %>
+<% end %>

@@ -25,7 +25,8 @@ module ImageGallery
         <script type="text/javascript" src="/javascripts/plupload/plupload.full.min.js"></script>
         <script type="text/javascript" src="/javascripts/plupload/jquery.plupload.queue.min.js"></script>
         <script type="text/javascript" src="/javascripts/gallery_admin.js"></script>
-
+        <script type="text/javascript" src="/javascripts/jquery-ui-1.8.8.custom.min.js"><script>
+        
         <link href="/stylesheets/plupload.queue.css" media="screen" rel="stylesheet" type="text/css" /> 
       }
 
@@ -44,11 +45,16 @@ module ImageGallery
 
     collection_id = params[:id]
     collection = ImageCollection.find(collection_id)
-    images = collection.images.paginate :page => params[:page], :order => 'created_at DESC'
-  
-    gallery_page = tag.attr['gallery_page']
     
     logged_in = !user.nil?
+    
+    if !logged_in
+      images = collection.images.paginate :page => params[:page], :order => 'display_order ASC'
+    else
+      images = collection.images.all :order => 'display_order ASC'
+    end
+      
+    gallery_page = tag.attr['gallery_page']
   
     view.content_tag :div, :id => 'image-collection' do 
       response.template.render(:partial => 'image_gallery/collection', 
@@ -66,8 +72,13 @@ module ImageGallery
     controller = view.controller 
     
     logged_in = !user.nil?
+  
+    if !logged_in 
+      image_collections = ImageCollection.paginate :page => params[:page], :order => 'display_order ASC'
+    else
+      image_collections = ImageCollection.all :order => 'display_order ASC'      
+    end
     
-    image_collections = ImageCollection.paginate :page => params[:page], :order => 'created_at DESC'
     collection_page = tag.attr['collection_page']
 
     view.content_tag :div, :id => 'collections' do 

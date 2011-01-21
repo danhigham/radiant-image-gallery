@@ -50,6 +50,42 @@ class ImageGalleryController < ApplicationController
     end
   end
   
+  def reorder_collections
+    if request.post?
+      ids = params[:image_order]
+      
+      x = 0
+      
+      ids.each do |collection_id|
+        ImageCollection.find(collection_id).update_attributes!(:display_order => x)
+        x = x + 1
+      end
+      
+      render :text => '1'
+
+    else
+      render :text => '0'
+    end
+  end
+  
+  def reorder_images
+   if request.post?
+     ids = params[:image_order]
+
+     x = 0
+
+     ids.each do |image_id|
+       Image.find(image_id).update_attributes!(:display_order => x)
+       x = x + 1
+     end
+
+     render :text => '1'
+
+   else
+     render :text => '0'
+   end
+  end
+  
   def delete_collection
     if request.post?
       collection_id = params[:collection_id]
