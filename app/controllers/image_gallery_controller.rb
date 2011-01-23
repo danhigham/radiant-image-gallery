@@ -71,14 +71,18 @@ class ImageGalleryController < ApplicationController
   def reorder_images
    if request.post?
      ids = params[:image_order]
-
+     last_collection = nil
      x = 0
 
      ids.each do |image_id|
-       Image.find(image_id).update_attributes!(:display_order => x)
+       image = Image.find(image_id)
+       image.update_attributes!(:display_order => x)
        x = x + 1
+       
+       last_collection = image.image_collection 
      end
 
+     last_collection.update_header if !last_collection.nil?
      render :text => '1'
 
    else

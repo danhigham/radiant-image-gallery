@@ -14,7 +14,11 @@ class ImageCollection < ActiveRecord::Base
     image_stack = Array.new
     rotation = 0
     
-    images = self.images.sort{|x,y| y.created_at <=> x.created_at}.first(4)
+    self.images.each do |x|
+      x.display_order = 0 if x.display_order.nil? 
+    end
+    
+    images = self.images.sort{|x,y| x.display_order <=> y.display_order}.first(4).reverse
     
     images.each do |image|
       rotation += 7
@@ -27,7 +31,7 @@ class ImageCollection < ActiveRecord::Base
     img = composite_stack(image_stack, -(rotation / 2))
     
     tempfile = Tempfile.new('header_image.png')
-    img.write(tempfile.path)
+    img.write(tempfile.path) { self.quality = 100 }
     
     self.update_attributes!(:header_image => tempfile)
      
