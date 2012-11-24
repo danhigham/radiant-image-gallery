@@ -1,4 +1,3 @@
-require 'ruby-debug'
 module ImageGallery
   include Radiant::Taggable
   
